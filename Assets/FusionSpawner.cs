@@ -8,8 +8,25 @@ using UnityEngine.SceneManagement;
 
 public class FusionSpawner : MonoBehaviour, INetworkRunnerCallbacks
 {
-    public void OnPlayerJoined(NetworkRunner runner, PlayerRef player) { }
-    public void OnPlayerLeft(NetworkRunner runner, PlayerRef player) { }
+    public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
+    {
+        if (runner.IsServer)
+        {
+            Vector2 spawnPosition = new Vector2((player.RawEncoded%runner.Config.Simulation.DefaultPlayers)*3, 1);
+            NetworkObject networkPlayerObject = runner.Spawn(_playerPrefab, spawnPosition, Quaternion.identity, player);
+            _spawnedCharacters.Add(player, networkPlayerObject);
+        }
+    }
+
+    public void OnPlayerLeft(NetworkRunner runner, PlayerRef player)
+    {
+        if (_spawnedCharacters.TryGetValue(player, out NetworkObject networkObject))
+        {
+            runner.Despawn(networkObject);
+            _spawnedCharacters.Remove(player);
+        }
+    }
+
     public void OnInput(NetworkRunner runner, NetworkInput input) { }
     public void OnInputMissing(NetworkRunner runner, PlayerRef player, NetworkInput input) { }
     public void OnShutdown(NetworkRunner runner, ShutdownReason reason) { }
@@ -25,7 +42,10 @@ public class FusionSpawner : MonoBehaviour, INetworkRunnerCallbacks
     public void OnSceneLoadDone(NetworkRunner runner) { }
     public void OnSceneLoadStart(NetworkRunner runner) { }
 
+    [SerializeField] private NetworkPrefabRef _playerPrefab;
+
     private NetworkRunner _runner;
+    private Dictionary<PlayerRef, NetworkObject> _spawnedCharacters = new Dictionary<PlayerRef, NetworkObject>();
 
     async void StartGame(GameMode mode)
     {
