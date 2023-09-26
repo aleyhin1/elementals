@@ -309,8 +309,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1296516929}
   - component: {fileID: 1296516930}
+  - component: {fileID: 1296516931}
   m_Layer: 0
-  m_Name: FusionSpawner
+  m_Name: NetworkRunner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -345,6 +346,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerPrefab:
     RawGuidValue: 6ef6c4d1196fa704792ea48eb6549d63
+--- !u!114 &1296516931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1296516928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f99e7d6e55928da4a83166113fb733f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
