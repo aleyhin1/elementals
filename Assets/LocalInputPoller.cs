@@ -11,7 +11,8 @@ public class LocalInputPoller : MonoBehaviour, INetworkRunnerCallbacks
     {
         PlayerInput localInput = new PlayerInput();
         localInput.MousePosition = Input.mousePosition;
-
+        localInput.HorizontalInput = Input.GetAxis("Horizontal");
+        localInput.VerticalInput = Input.GetAxis("Vertical");
         input.Set(localInput);
     }
 

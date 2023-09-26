@@ -6,4 +6,6 @@ using UnityEngine;
 public struct PlayerInput : INetworkInput
 {
     public Vector2 MousePosition;
+    public float HorizontalInput;
+    public float VerticalInput;
 }
