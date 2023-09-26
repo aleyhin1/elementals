@@ -13,6 +13,8 @@ public class LocalInputPoller : MonoBehaviour, INetworkRunnerCallbacks
         localInput.MousePosition = Input.mousePosition;
         localInput.HorizontalInput = Input.GetAxis("Horizontal");
         localInput.VerticalInput = Input.GetAxis("Vertical");
+        localInput.PlayerButtons.Set(PlayerButtons.Attack, Input.GetButton("Fire1"));
+        localInput.PlayerButtons.Set(PlayerButtons.Defense, Input.GetButton("Fire2"));
         input.Set(localInput);
     }
 
