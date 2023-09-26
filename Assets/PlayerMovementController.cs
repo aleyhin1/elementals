@@ -3,7 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public struct NetworkInputData : INetworkInput
+public class PlayerMovementController : NetworkBehaviour
 {
-    public Vector2 direction;
+    private void Look()
+    {
+
+    }
 }
