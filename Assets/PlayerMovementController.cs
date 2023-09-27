@@ -8,12 +8,10 @@ public class PlayerMovementController : NetworkBehaviour
     [SerializeField] private float _speed = 1f;
 
     private Camera _camera;
-    private Transform _bodyTransform;
 
     public override void Spawned()
     {
         _camera = FindObjectOfType<Camera>();
-        _bodyTransform = GetComponentInChildren<Transform>();
     }
 
     public override void FixedUpdateNetwork()
@@ -25,13 +23,13 @@ public class PlayerMovementController : NetworkBehaviour
     private void Look()
     {
         Vector3 rotationVector = new Vector3(0, 0, GetTurnAngle());
-        _bodyTransform.eulerAngles = rotationVector;
+        transform.eulerAngles = rotationVector;
     }
 
     private void Move()
     {
         var inputData = Runner.GetInputForPlayer<PlayerInput>(Object.InputAuthority);
-        Vector2 movementVector = new Vector2(inputData.Value.HorizontalInput, inputData.Value.VerticalInput);
+        Vector2 movementVector = new Vector2(inputData.Value.VerticalInput, inputData.Value.HorizontalInput);
         transform.Translate(movementVector * _speed * Runner.DeltaTime);
     }
 
