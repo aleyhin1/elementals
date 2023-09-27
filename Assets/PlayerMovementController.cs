@@ -29,14 +29,16 @@ public class PlayerMovementController : NetworkBehaviour
     private void Move()
     {
         var inputData = Runner.GetInputForPlayer<PlayerInput>(Object.InputAuthority);
-        Vector2 movementVector = new Vector2(inputData.Value.VerticalInput, inputData.Value.HorizontalInput);
+        Vector2 movementVector = new Vector2(inputData.Value.HorizontalInput, inputData.Value.VerticalInput);
         transform.Translate(movementVector * _speed * Runner.DeltaTime);
     }
 
     private float GetTurnAngle()
     {
         Vector2 directionVector = (GetMousePositionWorldPoint() - (Vector2)transform.position).normalized;
-        float turnAngle = Mathf.Atan2(directionVector.y, directionVector.x) * Mathf.Rad2Deg;
+        float directionAngle = Mathf.Atan2(directionVector.y, directionVector.x) * Mathf.Rad2Deg;
+        float offsetAngle = -90f;
+        float turnAngle = directionAngle + offsetAngle;
         return turnAngle;
     }
 
