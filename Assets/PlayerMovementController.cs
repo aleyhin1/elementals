@@ -16,6 +16,6 @@ public class PlayerMovementController : NetworkBehaviour
     {
         var inputData = Runner.GetInputForPlayer<PlayerInput>(Object.InputAuthority);
         Vector2 movementVector = new Vector2(inputData.Value.HorizontalInput, inputData.Value.VerticalInput);
-        transform.Translate(movementVector * _speed * Runner.DeltaTime);
+        transform.Translate(movementVector.normalized * _speed * Runner.DeltaTime);
     }
 }
