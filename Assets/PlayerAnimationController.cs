@@ -10,6 +10,8 @@ public class PlayerAnimationController : NetworkBehaviour
 
     private float _mousePositionY;
     private float positionY;
+    private float _horizontalInput;
+    private float _verticalInput;
 
 
     public override void Spawned()
@@ -20,20 +22,21 @@ public class PlayerAnimationController : NetworkBehaviour
 
     public override void Render()
     {
-        if ((_mousePositionY - positionY) > 0)
-        {
-            _animator.SetBool("IsTurnedBack", true);
-        }
-        else
-        {
-            _animator.SetBool("IsTurnedBack", false);
-        }
+        _animator.SetBool("IsTurnedBack", (_mousePositionY - positionY) > 0);
+        _animator.SetFloat("VerticalInput", _verticalInput);
     }
 
     public override void FixedUpdateNetwork()
     {
+        GetInputs();
+    }
+    
+    private void GetInputs()
+    {
         GetInput<PlayerInput>(out var input);
         _mousePositionY = _camera.ScreenToWorldPoint(input.MousePosition).y;
         positionY = transform.position.y;
+        _horizontalInput = input.HorizontalInput;
+        _verticalInput = input.VerticalInput;
     }
 }
