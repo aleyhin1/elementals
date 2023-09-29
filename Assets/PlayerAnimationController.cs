@@ -23,7 +23,7 @@ public class PlayerAnimationController : NetworkBehaviour
     public override void Render()
     {
         _animator.SetBool("IsTurnedBack", (_mousePositionY - positionY) > 0);
-        _animator.SetFloat("VerticalInput", _verticalInput);
+        _animator.SetBool("IsRunningVertically", _verticalInput != 0);
     }
 
     public override void FixedUpdateNetwork()
