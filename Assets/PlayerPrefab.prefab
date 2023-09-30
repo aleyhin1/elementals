@@ -191,8 +191,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interpolationDataSource: 0
-  Camera: {fileID: 0}
-  Animator: {fileID: 4488201882163755241}
 --- !u!1 &7957951468950720359
 GameObject:
   m_ObjectHideFlags: 0
